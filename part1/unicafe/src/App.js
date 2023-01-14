@@ -66,7 +66,7 @@ const Statistics = ({ good, bad, neutr }) => {
 
 const StatisticLine = ({ text, value }) => {
   // to display % for positive
-  if(text == "Positive") {
+  if(text === "Positive") {
     return (
       <tr>
         <td>{text}:</td><td>{value}%</td>
