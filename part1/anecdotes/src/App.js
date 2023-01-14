@@ -13,10 +13,32 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const randomInt = () => {
+    let max = anecdotes.length
+    let rand = Math.floor(Math.random() * (max - 0) + 0)
+
+    if(selected === rand) {
+      rand++
+      if(rand > max)
+        rand = 0
+    }
+    setSelected(rand)
+  }
+
   return (
     <div>
       {anecdotes[selected]}
+      <br />
+      <Button text="Next" onClick={randomInt}/>
     </div>
+  )
+}
+
+const Button = ({ text, onClick }) => {
+  return (
+    <button onClick={onClick}>
+      {text}
+    </button>
   )
 }
 
