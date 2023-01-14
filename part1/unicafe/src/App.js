@@ -50,13 +50,32 @@ const Statistics = ({ good, bad, neutr }) => {
   return (
     <div>
       <Header text="Statistics"/>
-      <div>good: {good}</div>
-      <div>neutral: {neutr}</div>
-      <div>bad: {bad}</div>
-      <div>all : {all}</div>
-      <div>average: {avg}</div>
-      <div>positive: {pos}%</div>
+      <table>
+        <StatisticLine text="Good" value={good}/>
+        <StatisticLine text="Neutral" value={neutr}/>
+        <StatisticLine text="Bad" value={bad}/>
+        <StatisticLine text="All" value={all}/>
+        <StatisticLine text="Average" value={avg}/>
+        <StatisticLine text="Positive" value={pos}/>
+      </table>
     </div>
+  )
+}
+
+const StatisticLine = ({ text, value }) => {
+  // to display % for positive
+  if(text == "Positive") {
+    return (
+      <tr>
+        <td>{text}:</td><td>{value}%</td>
+    </tr>
+    )
+  }
+
+  return (
+    <tr>
+      <td>{text}:</td><td>{value}</td>
+    </tr>
   )
 }
 
