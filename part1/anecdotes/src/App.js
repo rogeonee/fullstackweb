@@ -13,14 +13,25 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
   const [allVotes, addVote] = useState([0, 0, 0, 0, 0, 0, 0])
-
-  console.log(selected)
-  console.log(allVotes)
+  const [best, showBest] = useState(-1)
 
   const vote = () => {
     const copy = {...allVotes}
     copy[selected] += 1
     addVote(copy)
+    getBest(copy)
+    let max = copy[best]
+    let idx = selected
+    console.log("here")
+    console.log("max: ", max)
+    console.log("best idx: ", idx)
+    for(const i in copy) {
+      if(max < copy[i]) {
+        max = copy[i]
+        idx = i
+      }
+    }
+    showBest(idx)
   }
 
   const randomInt = () => {
@@ -35,14 +46,36 @@ const App = () => {
     setSelected(rand)
   }
 
+  function getBest(arr) {
+    console.log("Votes array: ", arr)
+    let max = 0
+    let idx = 0
+  
+    for(const i in arr) {
+      if(max < arr[i]) {
+        max = arr[i]
+        idx = i
+      }
+    }
+  
+    console.log("Max votes: ", max)
+    console.log("Max idx: ", idx)
+    showBest(idx)
+  }
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <br />
       Has {allVotes[selected]} votes
       <br />
       <Button text="Next" onClick={randomInt}/>
       <Button text="Vote" onClick={vote}/>
+      <h1>Best Anecdote</h1>
+      {anecdotes[best]}
+      <br />
+      has {allVotes[best]} votes.
     </div>
   )
 }
